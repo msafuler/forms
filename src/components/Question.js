@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 export default function Question(props) {
 
+  const [required, setRequired] = useState(false);
+
   const modifyQuestionTxt = (event) => {
     props.updateQuestion(event.target.value);
+  };
+
+  const toggleRequire = (event) => {
+    setRequired(current => !current)
   };
 
   return (
@@ -21,7 +27,19 @@ export default function Question(props) {
         />
         <button className="question-options">Button</button>
       </div>
-      <i className={`fa-solid fa-trash-can ${props.isActive ? 'hiden' : ''}`}></i>
+      <div className="question-icons">
+        <i
+          className={`fa-solid fa-trash-can ${props.isActive ? '' : 'hiden'}`}
+          onClick={() => props.deleteQuestion()}
+        >
+        </i>
+        <div
+          className={`required-button ${props.isActive ? '' : 'hiden'}`}
+          onClick={() => toggleRequire()}
+        >
+          <i className={`fa-solid fa-circle ${required ? 'require-active' : ''}`}></i>
+        </div>
+      </div>
     </div>
   )
 }

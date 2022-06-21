@@ -42,19 +42,13 @@ export default function Form(props) {
     setFormActive(false)
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-
-      }
-    };
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, []);
-
-  //const divStyles = { backgroundColor: 'rgba(21, 164, 195, 100' };
+  const deleteQuestion = (currentIndex) => {
+    setQuestions(prevQuestions => {
+      const currentQuestions = [...prevQuestions]
+      currentQuestions.splice(currentIndex, 1)
+      return currentQuestions
+    });
+  };
 
   return (
     <div className="form-container">
@@ -79,6 +73,7 @@ export default function Form(props) {
             toggleActive={() => toggleActive(i)}
             updateQuestion={() => updateQuestion(i)}
             isActive={index === i}
+            deleteQuestion={() => deleteQuestion(i)}
           />
         )
       })}
