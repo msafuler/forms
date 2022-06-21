@@ -1,0 +1,40 @@
+.question-form-container {
+    border: 1px solid $light-grey;
+    border-radius: 8px;
+    padding: 32px 16px;
+    position: relative;
+    margin: 16px 0;
+}
+
+.question-form {
+  font-size: 24px;
+  padding: 16px 0 8px 0;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  width: 65%;
+}
+
+.first-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.question-options {
+  border: 1px solid $light-grey;
+  border-radius: 4px;
+  padding: 16px;
+  width: 30%;
+  background-color: white;
+  cursor: pointer;
+}
+
+.fa-solid.fa-trash-can {
+  color: grey;
+  margin-top: 32px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.hiden {
+  display: none;
+}
