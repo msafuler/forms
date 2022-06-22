@@ -1,0 +1,74 @@
+.question-options-button {
+  font-size: 18px;
+  padding: 16px;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border: none;
+  vertical-align: middle;
+  transition: all 0.4s ease-in-out;
+  width: 208px;
+}
+
+.question-options-button:hover {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-container {
+  position: relative;
+  margin: 0 auto;
+}
+
+.dropdown.active {
+  opacity: 1;
+  transform: translateY(0);
+  height: 100%;
+  transition: all 0.4s ease-in-out;
+}
+
+.dropdown.inactive {
+  opacity: 0;
+  pointer-events: none;
+  height: 0px;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+}
+
+.question-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border: solid 1px $light-grey;
+  border-radius: 4px;
+  min-width: 224px;
+  max-height: 364px;
+  top: 24px;
+  background-color: white;
+  left: -108px;
+  top: -108px;
+  font-size: 18px;
+}
+
+.question-option {
+  padding: 24px;
+}
+
+.question-option:hover {
+  background-color: $bright-grey;
+}
+
+.selectedType {
+  background-color: $baby-blue;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+@media only screen and (max-width: 840px) {
+  .question-list {
+      left: -4px;
+    }
+}

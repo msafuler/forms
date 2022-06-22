@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from "uuid";
 import TextArea from './TextArea';
 import Question from './Question';
 
 export default function Form(props) {
 
   const ref = useRef(null);
+  const moveRef = useRef(null);
 
   const newTitle = (event) => {
     setTitle(event.target.value);
@@ -70,6 +72,7 @@ export default function Form(props) {
       {questions.map((question, i) => {
         return (
           <Question
+            moveRef={moveRef}
             toggleActive={() => toggleActive(i)}
             updateQuestion={() => updateQuestion(i)}
             isActive={index === i}

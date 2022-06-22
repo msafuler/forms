@@ -1,3 +1,47 @@
+.form-title-container {
+  border: 1px solid $light-grey;
+  border-radius: 8px;
+  padding: 32px 16px;
+  position: relative;
+}
+
+.form-title {
+  font-size: 40px;
+  width: 100%;
+  padding: 16px 0 8px 0;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+}
+
+.form-description {
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  white-space: normal;
+  word-break: break-word;
+  font-family: Roboto;
+  border-bottom: 1px solid $light-grey;
+  padding-top: 16px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border-bottom: 1px solid $green;
+}
+
+.form-title-container-line {
+  position: absolute;
+  background-color: $green;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 8px;
+  height: 9px;
+  top: -17px;
+  left: -64px;
+  width: calc(100% + 2px);
+  margin: 16px 64px;
+  width: 100%;
+}
 .question-form-container {
     border: 1px solid $light-grey;
     border-radius: 8px;
@@ -16,16 +60,6 @@
 
 .first-line {
   display: flex;
-  justify-content: space-between;
-}
-
-.question-options {
-  border: 1px solid $light-grey;
-  border-radius: 4px;
-  padding: 16px;
-  width: 30%;
-  background-color: white;
-  cursor: pointer;
 }
 
 .fa-solid.fa-trash-can {
@@ -35,7 +69,7 @@
   cursor: pointer;
 }
 
-.hiden {
+.hidden {
   display: none;
 }
 
@@ -51,7 +85,6 @@
   width: 54px;
   height: 16px;
   margin: 32px 0 0 64px;
-  position: relative;
   cursor: pointer;
   &.require-active {
     background-color: rgba(21, 164, 195, 35);
@@ -69,5 +102,14 @@
     color: $blue;
     margin-top: -4px;
     margin-left: 32px;
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .first-line {
+      display: block;
+  }
+  .question-form {
+    margin-bottom: 16px;
   }
 }
