@@ -7,7 +7,7 @@
   border: none;
   vertical-align: middle;
   transition: all 0.4s ease-in-out;
-  width: 208px;
+  width: 272px;
 }
 
 .question-options-button:hover {
@@ -46,7 +46,7 @@
   max-height: 364px;
   top: 24px;
   background-color: white;
-  left: -108px;
+  left: 24px;
   top: -108px;
   font-size: 18px;
 }
@@ -65,9 +65,18 @@
 
 .icon {
   margin-right: 8px;
+  color: $grey;
 }
 
-@media only screen and (max-width: 840px) {
+.question-type {
+  color: $grey;
+  .fa-solid.fa-sort-down {
+    margin-left: 16px;
+    color: $grey;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
   .question-list {
       left: -4px;
     }

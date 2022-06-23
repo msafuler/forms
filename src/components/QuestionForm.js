@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import QuestionsList from './QuestionsList'
+import questionTypes from '../data/questionTypes'
+import QuestionsList from './QuestionsList';
+import RadioAnswer from './RadioAnswer';
+import Checkbox from './Checkbox';
 
-export default function Question(props) {
+export default function QuestionForm(props) {
 
   const [required, setRequired] = useState(false);
   const [indexType, setIndexType] = useState(0);
@@ -9,34 +12,6 @@ export default function Question(props) {
   const changeQuestionType = (newIndex) => {
     setIndexType(newIndex);
   };
-
-  const questionTypes = [
-    {
-      label: "Short answer",
-      className: "fa-solid fa-grip-lines icon",
-      type: "short"
-    },
-    {
-      label: "Paragraph",
-      className: "fa-solid fa-align-justify icon",
-      type: "paragraph"
-    },
-    {
-      label: "Single choice",
-      className: "fa-solid fa-check icon",
-      type: "radio"
-    },
-    {
-      label: "Multiple choice",
-      className: "fa-solid fa-list-check icon",
-      type: "checkbox"
-    },
-    {
-      label: "Linear scale",
-      className: "fa-solid fa-ruler-horizontal icon",
-      type: "number"
-    }
-  ];
 
   const modifyQuestionTxt = (event) => {
     props.updateQuestion(event.target.value);
@@ -49,11 +24,13 @@ export default function Question(props) {
   const renderType = () => {
     switch (questionTypes[indexType].type) {
       case "short":
-        return <p>Short-answer text</p>
+        return <p className="short-answer">Short-answer text</p>
       case "paragraph":
-        return <p>Long-answer text</p>
+        return <p className="paragraph">Long-answer text</p>
       case "radio":
-        return <p>Radio</p>
+        return <RadioAnswer isActive={props.isActive} />
+      case "checkbox":
+        return <Checkbox isActive={props.isActive} />
         default:
         console.log("Default");
     }
@@ -78,9 +55,7 @@ export default function Question(props) {
           selectedIndex={indexType}
         />
       </div>
-
-
-
+      {renderType()}
       <div className="question-icons">
         <i
           className={`fa-solid fa-trash-can ${props.isActive ? '' : 'hidden'}`}

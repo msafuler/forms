@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from "uuid";
 import TextArea from './TextArea';
-import Question from './Question';
+import QuestionForm from './QuestionForm';
 
 export default function Form(props) {
 
@@ -54,39 +53,44 @@ export default function Form(props) {
 
   return (
     <div className="form-container">
-      <div
-        className={`form-title-container ${ formActive ? 'inFocus' : 'outOfFocus' }`}
-        ref={ref}
-        onClick={handleClick}
-      >
-        <div className="form-title-container-line"></div>
-        <input
-          className="form-title"
-          placeholder="Untitled form"
-          type="text"
-          onChange={newTitle}
-          maxLength="32"
-        />
-        <TextArea />
-      </div>
-      {questions.map((question, i) => {
-        return (
-          <Question
-            moveRef={moveRef}
-            toggleActive={() => toggleActive(i)}
-            updateQuestion={() => updateQuestion(i)}
-            isActive={index === i}
-            deleteQuestion={() => deleteQuestion(i)}
+      <div>
+        <div
+          className={`form-title-container ${ formActive ? 'inFocus' : 'outOfFocus' }`}
+          ref={ref}
+          onClick={handleClick}
+        >
+          <div className="form-title-container-line"></div>
+          <input
+            className="form-title"
+            placeholder="Untitled form"
+            type="text"
+            onChange={newTitle}
+            maxLength="32"
           />
-        )
-      })}
-      <button
-        onClick={newQuestion}
-        className="btn-add-question"
-      >
-        <i className="fa-solid fa-circle-plus">
-        </i>
-      </button>
+          <TextArea />
+        </div>
+        {questions.map((question, i) => {
+          return (
+            <QuestionForm
+              moveRef={moveRef}
+              toggleActive={() => toggleActive(i)}
+              updateQuestion={() => updateQuestion(i)}
+              isActive={index === i}
+              deleteQuestion={() => deleteQuestion(i)}
+            />
+          )
+        })}
+      </div>
+      <div className="button-container">
+        <button
+          onClick={newQuestion}
+          className="btn-add-question"
+        >
+          <i className="fa-solid fa-circle-plus">
+          </i>
+        </button>
+      </div>
+
     </div>
   )
 }

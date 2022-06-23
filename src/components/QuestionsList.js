@@ -18,9 +18,10 @@ export default function QuestionsList(props) {
         onClick={toggleOptions}
         ref={dropdownRef}
       >
-        <span>
+        <span className="question-type">
           <i className={selectedQuestionType.className}></i>
           {selectedQuestionType.label}
+          <i className="fa-solid fa-sort-down"></i>
         </span>
       </button>
       <nav
@@ -28,6 +29,7 @@ export default function QuestionsList(props) {
         <ul className="question-list">
           {props.questionTypes.map((questionType, i) =>
             <li
+            key={props.questionTypes.id}
               onClick={() => props.changeQuestionType(i)}
               className={`question-option ${selectedQuestionType === questionType ? 'selectedType' : ''}`}
             >

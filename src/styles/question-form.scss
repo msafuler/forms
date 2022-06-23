@@ -105,7 +105,24 @@ input:focus {
   }
 }
 
-@media only screen and (max-width: 840px) {
+.short-answer {
+  width: 55%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px dashed $light-grey;
+  font-size: 16px;
+  color: $grey;
+}
+.paragraph {
+  width: 85%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px dashed $light-grey;
+  font-size: 16px;
+  color: $grey;
+}
+
+@media only screen and (max-width: 1000px) {
   .first-line {
       display: block;
   }

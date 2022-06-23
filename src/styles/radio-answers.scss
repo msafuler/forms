@@ -1,0 +1,46 @@
+.radio-answers-container {
+  display: block;
+}
+
+.radio-options {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.radio-option {
+  width: 85%;
+  padding: 16px 0;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  font-size: 16px;
+}
+
+.add-option-button {
+  background-color: white;
+  border: none;
+  padding-top: 36px;
+  cursor: pointer;
+  font-size: 18px;
+  color: $light-grey;
+  &.other-button {
+    color: $blue;
+  }
+}
+
+.fa-solid.fa-xmark {
+  font-size: 24px;
+  margin-right: 24px;
+  color: $light-grey;
+}
+
+.add-option-container {
+  display: flex;
+  &.invisible {
+    display: none;
+  }
+}
+
+.txt {
+  padding-top: 36px;
+}
