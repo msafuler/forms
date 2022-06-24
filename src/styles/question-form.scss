@@ -3,6 +3,7 @@
   border-radius: 8px;
   padding: 32px 16px;
   position: relative;
+  background-color: $white;
 }
 
 .form-title {
@@ -48,6 +49,7 @@ input:focus {
     padding: 32px 16px;
     position: relative;
     margin: 16px 0;
+    background-color: $white;
 }
 
 .question-form {
@@ -56,6 +58,7 @@ input:focus {
   border: none;
   border-bottom: 1px solid $light-grey;
   width: 65%;
+  background-color: $white;
 }
 
 .first-line {
@@ -63,7 +66,7 @@ input:focus {
 }
 
 .fa-solid.fa-trash-can {
-  color: grey;
+  color: $grey;
   margin-top: 32px;
   font-size: 24px;
   cursor: pointer;

@@ -1,0 +1,55 @@
+.linear-scale-container {
+  display: flex;
+  color: $grey;
+  font-size: 18px;
+}
+
+.linear-scale {
+  list-style: none;
+  width: 88px;
+  max-height: 182px;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  background-color: $white;
+  text-align: center;
+  z-index: 2;
+  position: absolute;
+  top: -52px;
+  overflow-y: scroll;
+}
+
+.linear-scale-txt {
+  padding-inline-start: 40px;
+  padding-inline-end: 40px;
+  color: $grey;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.linear-scale-number {
+  padding: 8px 0;
+}
+
+.linear-scale-number:hover {
+  background-color: $bright-grey;;
+}
+
+.linear-scale-column {
+  position: relative;
+  display: flex;
+}
+
+.fa-solid.fa-sort-down.scale-arrow {
+  position: absolute;
+  top: 30px;
+  right: 16px;
+}
+
+.linear-scale-num {
+  color: $grey;
+  font-size: 18px;
+  padding-inline-start: 43px;
+  padding-inline-end: 40px;
+  margin-top: 30px;
+}

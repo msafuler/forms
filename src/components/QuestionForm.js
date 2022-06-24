@@ -3,6 +3,7 @@ import questionTypes from '../data/questionTypes'
 import QuestionsList from './QuestionsList';
 import RadioAnswer from './RadioAnswer';
 import Checkbox from './Checkbox';
+import LinearScale from './LinearScale';
 
 export default function QuestionForm(props) {
 
@@ -31,7 +32,9 @@ export default function QuestionForm(props) {
         return <RadioAnswer isActive={props.isActive} />
       case "checkbox":
         return <Checkbox isActive={props.isActive} />
-        default:
+      case "number":
+        return <LinearScale selectedIndex={indexType} />
+      default:
         console.log("Default");
     }
   };

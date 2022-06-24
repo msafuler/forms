@@ -1,12 +1,13 @@
 .form-container {
   position: relative;
   max-width: 1040px;
-  margin: 0 auto;
+  margin: 32px auto;
+  overflow-y: scroll;
 }
 
 .btn-add-question {
   border: none;
-  background-color: white;
+  background-color: $white;
   border: 1px solid $light-grey;
   border-radius: 8px;
   width: 100%;
@@ -21,12 +22,12 @@
 }
 
 .outOfFocus {
-  background-color: white;
+  background-color: $white;
   border-left: 10px solid $light-grey;
 }
 
 .fa-solid.fa-circle-plus {
-  color: gray;
+  color: $grey;
   font-size: 24px;
   margin: 24px 16px;
   cursor: pointer;
@@ -39,7 +40,7 @@
   right: 0.5%;
   text-align: center;
   overflow: hidden;
-  background-color: white;
+  background-color: $white;
   z-index: 10;
   bottom: 0;
 }

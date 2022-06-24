@@ -1,7 +1,7 @@
 .question-options-button {
   font-size: 18px;
   padding: 16px;
-  background-color: white;
+  background-color: $white;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   border: none;
@@ -21,7 +21,6 @@
 
 .dropdown.active {
   opacity: 1;
-  transform: translateY(0);
   height: 100%;
   transition: all 0.4s ease-in-out;
 }
@@ -43,12 +42,18 @@
   border: solid 1px $light-grey;
   border-radius: 4px;
   min-width: 224px;
-  max-height: 364px;
+  max-height: 272px;
   top: 24px;
-  background-color: white;
+  background-color: $white;
   left: 24px;
-  top: -108px;
+  top: -202px;
   font-size: 18px;
+  overflow-y: scroll;
+  z-index: 11;
+}
+
+.dropdown {
+  position: relative;
 }
 
 .question-option {

@@ -4,7 +4,7 @@
 
 .fa-solid.fa-square {
   margin-right: 16px;
-  color: white;
+  color: $white;
   border: 3px solid $light-grey;
   font-size: 20px;
   border-radius: 4px;
@@ -33,7 +33,7 @@
 }
 
 .add-checkbox-button {
-  background-color: white;
+  background-color: $white;
   border: none;
   padding-top: 36px;
   cursor: pointer;
