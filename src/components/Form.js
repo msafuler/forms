@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import TextArea from './TextArea';
 import QuestionForm from './QuestionForm';
 
@@ -18,18 +18,19 @@ export default function Form(props) {
   const [index, setIndex] = useState(-1);
 
   const newQuestion = (_) => {
-    setQuestions((prev) => [...prev, {}]);
+    setQuestions((prev) => [...prev, {
+      title: "",
+      type: "short",
+      required: false,
+      content: {}
+    }]);
   };
 
-  const updateQuestion = function (index, txt) {
-    const chosenQuestion = questions[index];
+  const updateQuestion = function (index, newQuestion) {
     setQuestions(prevQuestions => {
-      console.log(...prevQuestions.slice(0, index))
-      return [
-        ...prevQuestions.slice(0, index),
-        prevQuestions[index] + 1,
-        ...prevQuestions.slice(index + 1),
-      ]
+      const newQuestions = [...prevQuestions]
+      newQuestions[index] = newQuestion
+      return newQuestions;
     });
   };
 
@@ -74,9 +75,10 @@ export default function Form(props) {
             <QuestionForm
               moveRef={moveRef}
               toggleActive={() => toggleActive(i)}
-              updateQuestion={() => updateQuestion(i)}
+              updateQuestion={(newQuestion) => updateQuestion(i, newQuestion)}
               isActive={index === i}
               deleteQuestion={() => deleteQuestion(i)}
+              question={question}
             />
           )
         })}

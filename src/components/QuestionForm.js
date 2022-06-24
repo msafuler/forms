@@ -7,20 +7,25 @@ import LinearScale from './LinearScale';
 
 export default function QuestionForm(props) {
 
-  const [required, setRequired] = useState(false);
   const [indexType, setIndexType] = useState(0);
 
   const changeQuestionType = (newIndex) => {
     setIndexType(newIndex);
   };
 
-  const modifyQuestionTxt = (event) => {
-    props.updateQuestion(event.target.value);
+  const modifyQuestionTitle = (event) => {
+    props.updateQuestion({
+      ...props.question,
+      title: event.target.value
+    });
   };
 
-  const toggleRequire = (event) => {
-    setRequired(current => !current)
-  };
+  const modifyQuestionRequired = () => {
+    props.updateQuestion({
+      ...props.question,
+      required: !props.question.required
+    });
+  }
 
   const renderType = () => {
     switch (questionTypes[indexType].type) {
@@ -49,7 +54,7 @@ export default function QuestionForm(props) {
           className="question-form"
           placeholder="Question"
           type="text"
-          onChange={modifyQuestionTxt}
+          onChange={modifyQuestionTitle}
           maxLength="100"
         />
         <QuestionsList
@@ -67,9 +72,9 @@ export default function QuestionForm(props) {
         </i>
         <div
           className={`required-button ${props.isActive ? '' : 'hidden'}`}
-          onClick={() => toggleRequire()}
+          onClick={() => modifyQuestionRequired()}
         >
-          <i className={`fa-solid fa-circle ${required ? 'require-active' : ''}`}></i>
+          <i className={`fa-solid fa-circle ${props.question.required ? 'require-active' : ''}`}></i>
         </div>
       </div>
     </div>
