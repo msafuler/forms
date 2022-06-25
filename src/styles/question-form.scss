@@ -1,7 +1,7 @@
 .form-title-container {
   border: 1px solid $light-grey;
   border-radius: 8px;
-  padding: 32px 16px;
+  padding: 32px 32px 32px 48px;
   position: relative;
   background-color: $white;
 }
@@ -46,10 +46,10 @@ input:focus {
 .question-form-container {
     border: 1px solid $light-grey;
     border-radius: 8px;
-    padding: 32px 16px;
+    padding: 32px 32px 32px 48px;
     position: relative;
-    margin: 16px 0;
     background-color: $white;
+    margin: 16px 0;
 }
 
 .question-form {
@@ -123,6 +123,28 @@ input:focus {
   border-bottom: 1px dashed $light-grey;
   font-size: 16px;
   color: $grey;
+}
+
+.fa-solid.fa-braille.handle.form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  text-align: center;
+  color: $light-grey;
+  font-size: 20px;
+}
+
+.fa-solid.fa-braille.handle.form:hover {
+  cursor: pointer;
+}
+
+.fa-solid.fa-braille.handle.form.hidden {
+  display: none;
+}
+
+.selected {
+  background-color: $grey-shadow;
 }
 
 @media only screen and (max-width: 1000px) {

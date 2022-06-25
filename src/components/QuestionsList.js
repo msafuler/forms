@@ -12,7 +12,7 @@ export default function QuestionsList(props) {
   const selectedQuestionType = props.questionTypes[props.selectedIndex]
 
   return (
-    <div className="dropdown-container">
+    <div className={`dropdown-container ${props.isActive ? '' : 'hidden'}`}>
       <button
         className="question-options-button"
         onClick={toggleOptions}
@@ -29,7 +29,7 @@ export default function QuestionsList(props) {
         <ul className="question-list">
           {props.questionTypes.map((questionType, i) =>
             <li
-            key={props.questionTypes.id}
+              key={questionType.id}
               onClick={() => props.changeQuestionType(i)}
               className={`question-option ${selectedQuestionType === questionType ? 'selectedType' : ''}`}
             >

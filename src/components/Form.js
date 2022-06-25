@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ReactSortable } from "react-sortablejs";
+import { v4 as uuidv4 } from "uuid";
 import TextArea from './TextArea';
 import QuestionForm from './QuestionForm';
 
 export default function Form(props) {
 
   const ref = useRef(null);
-  const moveRef = useRef(null);
 
   const newTitle = (event) => {
     setTitle(event.target.value);
@@ -15,14 +16,15 @@ export default function Form(props) {
   const [description, setDescription] = useState('Form description');
   const [questions, setQuestions] = useState([]);
   const [formActive, setFormActive] = useState(false);
-  const [index, setIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const newQuestion = (_) => {
     setQuestions((prev) => [...prev, {
       title: "",
       type: "short",
       required: false,
-      content: {}
+      content: {},
+      id: uuidv4()
     }]);
   };
 
@@ -36,11 +38,11 @@ export default function Form(props) {
 
   const handleClick = () => {
     setFormActive(true)
-    setIndex(-1)
+    setSelectedIndex(-1)
   };
 
   const toggleActive = (newIndex) => {
-    setIndex(newIndex)
+    setSelectedIndex(newIndex)
     setFormActive(false)
   };
 
@@ -68,20 +70,29 @@ export default function Form(props) {
             onChange={newTitle}
             maxLength="32"
           />
-          <TextArea />
+          <TextArea setDescription={setDescription}/>
         </div>
-        {questions.map((question, i) => {
-          return (
-            <QuestionForm
-              moveRef={moveRef}
-              toggleActive={() => toggleActive(i)}
-              updateQuestion={(newQuestion) => updateQuestion(i, newQuestion)}
-              isActive={index === i}
-              deleteQuestion={() => deleteQuestion(i)}
-              question={question}
-            />
-          )
-        })}
+            <ReactSortable
+              list={questions}
+              setList={setQuestions}
+              animation={200}
+              delayOnTouchStart={true}
+              delay={2}
+              handle={'.handle'}
+              onEnd={(event) => setSelectedIndex(event.newIndex)}
+            >
+              {questions.map((question, i) => (
+              <QuestionForm
+                toggleActive={() => toggleActive(i)}
+                updateQuestion={(newQuestion) => updateQuestion(i, newQuestion)}
+                isActive={selectedIndex === i}
+                deleteQuestion={() => deleteQuestion(i)}
+                question={question}
+                key={question.id}
+                setSelectedIndex={setSelectedIndex}
+                selectedIndex={selectedIndex}
+              />))}
+            </ReactSortable>
       </div>
       <div className="button-container">
         <button

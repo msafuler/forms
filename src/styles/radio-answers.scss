@@ -1,19 +1,30 @@
 .radio-answers-container {
   display: block;
+  background-color: $white;
+}
+
+.radio-txt {
+  border: none;
+  font-size: 16px;
+  padding: 16px 0;
+  width: 100%;
 }
 
 .radio-options {
-  margin-top: 24px;
   display: flex;
+  font-size: 16px;
+  width: 100%;
+}
+
+.radio-row {
+  display: flex;
+  padding-top: 16px;
+  margin: 16px 0;
   justify-content: space-between;
 }
 
-.radio-option {
-  width: 85%;
-  padding: 16px 0;
-  border: none;
+.radio-txt.line {
   border-bottom: 1px solid $light-grey;
-  font-size: 16px;
 }
 
 .add-option-button {
@@ -32,6 +43,7 @@
   font-size: 24px;
   margin-right: 24px;
   color: $light-grey;
+  margin-top: 16px;
 }
 
 .add-option-container {
@@ -43,4 +55,27 @@
 
 .txt {
   padding-top: 36px;
+}
+
+.radio-line {
+  position: relative;
+}
+
+.fa-solid.fa-braille.handle.radio {
+  position: absolute;
+  left: -36px;
+  top: 34px;
+  text-align: center;
+  color: $light-grey;
+  transform: rotate(90deg);
+}
+
+.fa-solid.fa-circle-dot {
+  color: $light-grey;
+  font-size: 24px;
+  margin: 16px 32px 0 4px;
+}
+
+.fa-solid.fa-braille.handle.radio:hover {
+  cursor: pointer;
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
 
 export const useOptions = (initialState) => {
 
@@ -7,7 +8,7 @@ export const useOptions = (initialState) => {
   const changeOption = (optionValue, i) => {
     setOptions(previousOptions => {
       const modifiedOptions = [...previousOptions]
-      modifiedOptions[i] = optionValue;
+      modifiedOptions[i] = { ...optionValue, id: modifiedOptions[i].id };
       return modifiedOptions;
     });
   };
@@ -15,7 +16,7 @@ export const useOptions = (initialState) => {
   const addOption = (newOption) => {
     setOptions(previousOptions => {
       const modifiedOptions = [...previousOptions]
-      modifiedOptions.push(newOption);
+      modifiedOptions.push({...newOption, id: uuidv4()});
       return modifiedOptions;
     })
   };

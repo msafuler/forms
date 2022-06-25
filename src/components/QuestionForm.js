@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import questionTypes from '../data/questionTypes'
 import QuestionsList from './QuestionsList';
 import RadioAnswer from './RadioAnswer';
@@ -49,9 +49,10 @@ export default function QuestionForm(props) {
       className={`question-form-container ${props.isActive ? 'inFocus' : 'outOfFocus'}`}
       onClick={() => props.toggleActive()}
     >
+      <i className={`fa-solid fa-braille handle form ${props.isActive ? '' : 'hidden'}`}></i>
       <div className="first-line">
         <input
-          className="question-form"
+          className={`question-form ${props.isActive ? 'selected' : ''}`}
           placeholder="Question"
           type="text"
           onChange={modifyQuestionTitle}
@@ -61,6 +62,7 @@ export default function QuestionForm(props) {
           questionTypes={questionTypes}
           changeQuestionType={changeQuestionType}
           selectedIndex={indexType}
+          isActive={props.isActive}
         />
       </div>
       {renderType()}

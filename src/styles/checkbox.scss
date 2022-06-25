@@ -1,13 +1,16 @@
 .checkbox-container {
   display: block;
+  background-color: $white;
 }
 
 .fa-solid.fa-square {
   margin-right: 16px;
   color: $white;
   border: 3px solid $light-grey;
-  font-size: 20px;
   border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  margin: 16px 32px 0 4px;
 }
 
 .checkbox-option {
@@ -19,10 +22,8 @@
 
 .checkbox-options {
   display: flex;
-  border-bottom: 1px solid $light-grey;
   font-size: 16px;
-  width: 85%;
-  padding-bottom: 16px;
+  width: 100%;
 }
 
 .checkbox-row {
@@ -30,6 +31,10 @@
   padding-top: 16px;
   margin: 16px 0;
   justify-content: space-between;
+}
+
+.checkbox-line {
+  position: relative;
 }
 
 .add-checkbox-button {
@@ -53,6 +58,12 @@ input[type='checkbox'] {
 .checkbox-txt {
   border: none;
   font-size: 16px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.checkbox-txt.line {
+  border-bottom: 1px solid $light-grey;
 }
 
 .add-checkbox-container {
@@ -60,4 +71,8 @@ input[type='checkbox'] {
   &.invisible {
     display: none;
   }
+}
+
+.fa-solid.fa-braille.handle.radio.checkbox {
+  top: 34px;
 }
