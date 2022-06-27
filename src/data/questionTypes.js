@@ -16,19 +16,22 @@ const questionTypes = [
     label: "Single choice",
     className: "fa-solid fa-check icon",
     type: "radio",
-    id: uuidv4()
+    id: uuidv4(),
+    content: { options: [{ label: "Option", id: uuidv4() }] }
   },
   {
     label: "Multiple choice",
     className: "fa-solid fa-list-check icon",
     type: "checkbox",
-    id: uuidv4()
+    id: uuidv4(),
+    content: { options: [{ label: "Option", id: uuidv4() }] }
   },
   {
     label: "Linear scale",
     className: "fa-solid fa-ruler-horizontal icon",
     type: "number",
-    id: uuidv4()
+    id: uuidv4(),
+    content: { min: 0, max: 4, minLabel: "", maxLabel: "" }
   }
 ];
 

@@ -1,30 +1,38 @@
-.radio-answers-container {
+.multiple-options-container {
   display: block;
   background-color: $white;
 }
 
-.radio-txt {
+.multiple-options-line {
+  position: relative;
+}
+
+.multiple-options-txt {
   border: none;
   font-size: 16px;
   padding: 16px 0;
   width: 100%;
 }
 
-.radio-options {
+.multiple-options-txt.line {
+  border-bottom: 1px solid $light-grey;
+}
+
+.multiple-options-txt:focus {
+  border-bottom: 1px solid $green;
+}
+
+.multiple-options {
   display: flex;
   font-size: 16px;
   width: 100%;
 }
 
-.radio-row {
+.multiple-options-row {
   display: flex;
   padding-top: 16px;
   margin: 16px 0;
   justify-content: space-between;
-}
-
-.radio-txt.line {
-  border-bottom: 1px solid $light-grey;
 }
 
 .add-option-button {
@@ -39,13 +47,6 @@
   }
 }
 
-.fa-solid.fa-xmark {
-  font-size: 24px;
-  margin-right: 24px;
-  color: $light-grey;
-  margin-top: 16px;
-}
-
 .add-option-container {
   display: flex;
   &.invisible {
@@ -57,10 +58,6 @@
   padding-top: 36px;
 }
 
-.radio-line {
-  position: relative;
-}
-
 .fa-solid.fa-braille.handle.radio {
   position: absolute;
   left: -36px;
@@ -70,12 +67,25 @@
   transform: rotate(90deg);
 }
 
+.fa-solid.fa-braille.handle.radio:hover {
+  cursor: pointer;
+}
+
 .fa-solid.fa-circle-dot {
   color: $light-grey;
   font-size: 24px;
   margin: 16px 32px 0 4px;
 }
 
-.fa-solid.fa-braille.handle.radio:hover {
-  cursor: pointer;
+.fa-solid.fa-square {
+  color: $light-grey;
+  font-size: 24px;
+  margin: 16px 32px 0 4px;
+}
+
+.fa-solid.fa-xmark {
+  font-size: 24px;
+  margin-right: 24px;
+  color: $light-grey;
+  margin-top: 16px;
 }

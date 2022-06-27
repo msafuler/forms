@@ -9,6 +9,7 @@ export const useOptions = (initialState) => {
     setOptions(previousOptions => {
       const modifiedOptions = [...previousOptions]
       modifiedOptions[i] = { ...optionValue, id: modifiedOptions[i].id };
+
       return modifiedOptions;
     });
   };

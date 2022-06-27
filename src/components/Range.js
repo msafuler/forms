@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { useClickOutside } from './useClickOutside';
+import React, { useRef } from 'react';
+import { v4 as uuidv4 } from "uuid";
+import { useClickOutside } from '../hooks/useClickOutside';
 
 export default function LinearScale(props) {
 
@@ -22,6 +23,7 @@ export default function LinearScale(props) {
       <li
         className={`linear-scale-number ${props.num === n ? 'selectedType' : ''}`}
         onClick={clickNum}
+        key={uuidv4()}
       >
         {n}
       </li>

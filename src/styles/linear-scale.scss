@@ -53,3 +53,45 @@
   padding-inline-end: 40px;
   margin-top: 30px;
 }
+
+.linear-scale-range-info {
+  color: $grey;
+  font-size: 18px;
+  padding: 16px 0;
+  outline: none;
+}
+
+.linear-scale-range-label {
+  border: none;
+  margin-left: 16px;
+  color: $grey;
+  font-size: 18px;
+  border-bottom: 1px solid $light-grey;
+  width: 45%;
+}
+
+.linear-scale-range-label.line:focus {
+  border-bottom: 1px solid $green;
+}
+
+.no-show {
+  display: none;
+}
+
+.fa-solid.fa-circle {
+  font-size: 24px;;
+}
+
+.linear-scale-preview-num {
+  font-size: 24px;
+}
+
+.linear-scale-preview-hidden {
+  margin: 64px auto;
+}
+
+.linear-scale-container.noshow {
+  display: flex;
+  justify-content: space-around;
+  margin: 16px 0;;
+}

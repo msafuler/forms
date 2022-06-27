@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ReactSortable } from "react-sortablejs";
-import { v4 as uuidv4 } from "uuid";
-import { useOptions } from '../helpers/options';
+import { useOptions } from '../hooks/useOptions';
 
 export default function Checkbox(props) {
 
-  const [options, setOptions, functions] = useOptions([{ label: "Option", id: uuidv4()}])
+  const [options, setOptions, functions] = useOptions(props.question.content.options)
+  const modifyQuestionContent = props.modifyQuestionContent;
+
+  useEffect(() => {
+    modifyQuestionContent({ options: options })
+  }, [options]);
 
   const handleOtherClick = () => {
-    functions.addOption({ label: "Other...", readOnly: true, id: uuidv4() });
+    functions.addOption({ label: "Other...", readOnly: true });
   };
 
   const otherExists = options.some(option => option.readOnly)
 
   return (
-    <div className="checkbox-container">
+    <div className="multiple-options-container">
       <ReactSortable
         list={options}
         setList={setOptions}
@@ -24,19 +28,19 @@ export default function Checkbox(props) {
         handle={'.handle'}
       >
         {options.map((option, index) =>
-          <div key={option.id} className="checkbox-line">
+          <div key={option.id} className="multiple-options-line">
             <i className={`fa-solid fa-braille handle radio ${props.isActive ? '' : 'hidden'}`}></i>
-            <div className="checkbox-row">
-              <div className="checkbox-options">
+            <div className="multiple-options-row">
+              <div className="multiple-options">
                 <i className="fa-solid fa-square"></i>
                 <input
                   onChange={(event) => functions.changeOption({label: event.target.value}, index)}
-                  className={`checkbox-txt ${props.isActive ? 'line' : ''}`}
+                  className={`multiple-options-txt ${props.isActive ? 'line' : ''}`}
                   value={option.label}
                   readOnly={option.readOnly}
                 />
               <i
-                className={`fa-solid fa-xmark ${props.isActive ? '' : 'hide'}`}
+                className={`fa-solid fa-xmark ${props.isActive ? '' : 'hidden'}`}
                 onClick={() => functions.deleteOption(index)}
               >
               </i>
@@ -44,10 +48,10 @@ export default function Checkbox(props) {
             </div>
           </div>
         )}
-        <div className={`add-checkbox-container ${props.isActive ? '' : 'invisible'}`}>
+        <div className={`add-option-container ${props.isActive ? '' : 'invisible'}`}>
           <button
             onClick={() => functions.addOption({label: "Option"})}
-            className="add-checkbox-button"
+            className="add-option-button"
           >
             Add option
           </button>
@@ -56,7 +60,7 @@ export default function Checkbox(props) {
             <span className="txt">or</span>
               <button
                 onClick={handleOtherClick}
-                className="add-checkbox-button other-button"
+              className="add-option-button other-button"
               >
                 Add "Other"
               </button>

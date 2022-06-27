@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ReactSortable } from "react-sortablejs";
-import { useOptions } from '../helpers/options';
-import { v4 as uuidv4 } from "uuid";
+import { useOptions } from '../hooks/useOptions';
 
-export default function RadioAnswer(props) {
+export default function RadioQuestion(props) {
 
-  const [options, setOptions, functions] = useOptions([{ label: "Option", id: uuidv4() }]);
+  const [options, setOptions, functions] = useOptions(props.question.content.options);
+  const modifyQuestionContent = props.modifyQuestionContent;
+
+  useEffect(() => {
+    modifyQuestionContent({ options: options })
+  }, [options]);
 
   const handleOtherClick = () => {
     functions.addOption({ label: "Other...", readOnly: true });
@@ -15,7 +19,7 @@ export default function RadioAnswer(props) {
 
   return (
     <div>
-      <div className="radio-answers-container">
+      <div className="multiple-options-container">
         <ReactSortable
           list={options}
           setList={setOptions}
@@ -25,20 +29,20 @@ export default function RadioAnswer(props) {
           handle={'.handle'}
         >
           {options.map((option, index) =>
-            <div key={option.id} className="radio-line">
+            <div key={option.id} className="multiple-options-line">
               <i className={`fa-solid fa-braille handle radio ${props.isActive ? '' : 'hidden'}`}></i>
-              <div className="radio-row">
-                <div className="radio-options">
+              <div className="multiple-options-row">
+                <div className="multiple-options">
                   <i className="fa-solid fa-circle-dot"></i>
                   <input
-                    className={`radio-txt ${props.isActive ? 'line' : ''}`}
+                    className={`multiple-options-txt ${props.isActive ? 'line' : ''}`}
                     type="text"
                     value={option.label}
                     onChange={(event) => functions.changeOption({label: event.target.value}, index)}
                     readOnly={option.readOnly}
                   />
                   <i
-                    className={`fa-solid fa-xmark ${props.isActive ? '' : 'hide'}`}
+                    className={`fa-solid fa-xmark ${props.isActive ? '' : 'hidden'}`}
                     onClick={() => functions.deleteOption(index)}
                   >
                   </i>

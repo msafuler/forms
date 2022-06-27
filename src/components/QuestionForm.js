@@ -1,16 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import questionTypes from '../data/questionTypes'
-import QuestionsList from './QuestionsList';
-import RadioAnswer from './RadioAnswer';
+import QuestionsList from './QuestionsListDropdown';
+import RadioQuestion from './RadioQuestion';
 import Checkbox from './Checkbox';
 import LinearScale from './LinearScale';
 
 export default function QuestionForm(props) {
 
-  const [indexType, setIndexType] = useState(0);
+  const questionTypeIndex = questionTypes.findIndex(element => element.type === props.question.type)
 
-  const changeQuestionType = (newIndex) => {
+  const [indexType, setIndexType] = useState(questionTypeIndex);
+
+  const modifyQuestionType = (newIndex) => {
     setIndexType(newIndex);
+    const questionType = questionTypes[newIndex]
+    const questionTypeCopy = {...questionType}
+    props.updateQuestion({ ...props.question, content: questionTypeCopy.content, type: questionTypeCopy.type });
   };
 
   const modifyQuestionTitle = (event) => {
@@ -27,6 +32,13 @@ export default function QuestionForm(props) {
     });
   }
 
+  const modifyQuestionContent = (newContent) => {
+    props.updateQuestion({
+      ...props.question,
+      content: { ...newContent }
+    });
+  };
+
   const renderType = () => {
     switch (questionTypes[indexType].type) {
       case "short":
@@ -34,11 +46,11 @@ export default function QuestionForm(props) {
       case "paragraph":
         return <p className="paragraph">Long-answer text</p>
       case "radio":
-        return <RadioAnswer isActive={props.isActive} />
+        return <RadioQuestion question={props.question} isActive={props.isActive} modifyQuestionContent={modifyQuestionContent} />
       case "checkbox":
-        return <Checkbox isActive={props.isActive} />
+        return <Checkbox question={props.question}  isActive={props.isActive} modifyQuestionContent={modifyQuestionContent} />
       case "number":
-        return <LinearScale selectedIndex={indexType} />
+        return <LinearScale question={props.question} selectedIndex={indexType} isActive={props.isActive} modifyQuestionContent={modifyQuestionContent} />
       default:
         console.log("Default");
     }
@@ -57,10 +69,11 @@ export default function QuestionForm(props) {
           type="text"
           onChange={modifyQuestionTitle}
           maxLength="100"
+          value={props.question.title}
         />
         <QuestionsList
           questionTypes={questionTypes}
-          changeQuestionType={changeQuestionType}
+          changeQuestionType={modifyQuestionType}
           selectedIndex={indexType}
           isActive={props.isActive}
         />

@@ -7,6 +7,7 @@ import QuestionForm from './QuestionForm';
 export default function Form(props) {
 
   const ref = useRef(null);
+  const didMountRef = useRef(false);
 
   const newTitle = (event) => {
     setTitle(event.target.value);
@@ -18,12 +19,41 @@ export default function Form(props) {
   const [formActive, setFormActive] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
-  const newQuestion = (_) => {
+  useEffect(() => {
+    const dataString = window.localStorage.getItem('MY_FORM_STATE');
+    const data = JSON.parse(dataString)
+    if (data !== null) {
+      setTitle(data.title);
+      setDescription(data.description);
+      setQuestions(data.questions);
+      setFormActive(data.formActive);
+      setSelectedIndex(data.selectedIndex);
+    }
+
+    didMountRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      return;
+    }
+
+    const formState = {
+      title,
+      description,
+      questions,
+      formActive,
+      selectedIndex
+    };
+    window.localStorage.setItem('MY_FORM_STATE', JSON.stringify(formState));
+  }, [title, description, questions, formActive, selectedIndex]);
+
+  const newQuestion = (event) => {
     setQuestions((prev) => [...prev, {
       title: "",
       type: "short",
       required: false,
-      content: {},
+      content: null,
       id: uuidv4()
     }]);
   };
@@ -56,6 +86,7 @@ export default function Form(props) {
 
   return (
     <div className="form-container">
+      { description }
       <div>
         <div
           className={`form-title-container ${ formActive ? 'inFocus' : 'outOfFocus' }`}
@@ -67,10 +98,11 @@ export default function Form(props) {
             className="form-title"
             placeholder="Untitled form"
             type="text"
+            value={title}
             onChange={newTitle}
             maxLength="32"
           />
-          <TextArea setDescription={setDescription}/>
+          <TextArea description={description} setDescription={setDescription}/>
         </div>
             <ReactSortable
               list={questions}
@@ -99,8 +131,7 @@ export default function Form(props) {
           onClick={newQuestion}
           className="btn-add-question"
         >
-          <i className="fa-solid fa-circle-plus">
-          </i>
+          <i className="fa-solid fa-circle-plus" />
         </button>
       </div>
 

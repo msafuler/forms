@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { useClickOutside } from './useClickOutside';
+import { useClickOutside } from '../hooks/useClickOutside';
 
-export default function QuestionsList(props) {
+export default function QuestionsListDropdown(props) {
   const dropdownRef = useRef(null);
   const [open, setOpen] = useClickOutside(dropdownRef, false);
 

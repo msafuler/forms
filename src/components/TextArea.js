@@ -27,6 +27,7 @@ export default function TextArea(props) {
       style={{resize: 'none'}}
       className="form-description"
       placeholder="Form description"
+      value={props.description}
       type="text"
       onChange={changeDescription}
       ref={ref}
