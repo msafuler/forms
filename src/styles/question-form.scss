@@ -147,6 +147,12 @@ input:focus {
   background-color: $grey-shadow;
 }
 
+.show-required {
+  font-style: oblique;
+  color: red;
+  margin: 32px 82% 0;
+}
+
 @media only screen and (max-width: 1000px) {
   .first-line {
       display: block;

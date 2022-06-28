@@ -86,7 +86,6 @@ export default function Form(props) {
 
   return (
     <div className="form-container">
-      { description }
       <div>
         <div
           className={`form-title-container ${ formActive ? 'inFocus' : 'outOfFocus' }`}

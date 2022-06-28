@@ -1,0 +1,24 @@
+.navbar {
+  height: 40px;
+}
+
+.navbar-list {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 20vw;
+}
+
+.nav-item {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  font: 16px;
+  color: $grey;
+
+}
+
+a:hover {
+  cursor: pointer;
+}

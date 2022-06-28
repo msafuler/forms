@@ -95,3 +95,22 @@
   justify-content: space-around;
   margin: 16px 0;;
 }
+
+.clear-selection {
+  color: $light-grey;
+  cursor: pointer;
+}
+
+.linear-radio-selector {
+  width: 22px;
+  height: 22px;
+}
+
+.linear-scale-preview-answer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.linear-scale-main {
+  flex: 2;
+}

@@ -52,7 +52,7 @@ export default function QuestionForm(props) {
       case "number":
         return <LinearScale question={props.question} selectedIndex={indexType} isActive={props.isActive} modifyQuestionContent={modifyQuestionContent} />
       default:
-        console.log("Default");
+        return null;
     }
   };
 
