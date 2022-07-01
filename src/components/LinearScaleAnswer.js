@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from "uuid";
 
 export default function LinearScale(props) {
 
   const content = props.question.content
-  const [number, setNumber] = useState(-1);
   const arrNum = [];
   const arrIcons = [];
 
   const chooseNumber = (event) => {
-    setNumber(parseInt(event.target.value, 10));
+    props.updateAnswer({value: parseInt(event.target.value, 10)});
   }
 
   for (let i = content.min; i <= content.max; i++) {
-    arrNum.push(<span className="linear-scale-preview-num" key={uuidv4()}>{i}</span>)
+    arrNum.push(<span className="linear-scale-preview-num" key={uuidv4()}>{i}</span>);
   }
   for (let i = content.min; i <= content.max; i++) {
     arrIcons.push(
@@ -21,25 +20,20 @@ export default function LinearScale(props) {
         <input
           className="linear-radio-selector"
           type="radio"
-          name="radio"
           value={i}
           onChange={chooseNumber}
-          checked={number === i}
+          checked={props.answer.value === i}
         />
       </label>
-    )
-  }
-
-  // useEffect(() => {
-  //   modifyQuestionContent({ min, max, minLabel, maxLabel })
-  // }, [min, max, minLabel, maxLabel]);
+    );
+  };
 
   const clearNumber = () => {
-    setNumber(-1);
+    props.updateAnswer({value: -1});
   }
 
   return (
-    <div>
+    <div className={props.className}>
       <div className="linear-scale-preview-hidden linear-scale-preview-answer">
         <span>{content.minLabel}</span>
         <div className="linear-scale-main">

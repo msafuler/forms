@@ -26,7 +26,7 @@ export default function TextArea(props) {
   return (
     <textarea
       style={{resize: 'none'}}
-      className="form-description"
+      className={`form-description ${props.className}`}
       placeholder={props.placeholder}
       value={props.fieldDescription}
       type="text"

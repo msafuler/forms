@@ -3,7 +3,6 @@ import React from 'react';
 export default function CheckboxAnswer(props) {
   const other = "Other..."
 
-  console.log(props.answer)
   const otherIndex = props.answer.label.findIndex(label =>
     label === other);
 
@@ -23,7 +22,7 @@ export default function CheckboxAnswer(props) {
     newlyChecked[otherIndex] = event.target.value;
     const newLabels = [...props.answer.label];
     newLabels[otherIndex] = other;
-    props.updateAnswer({ ...props.answer, value: newlyChecked });
+    props.updateAnswer({ ...props.answer, label: newLabels, value: newlyChecked });
   }
 
   const addChecked = (id) => {
@@ -44,7 +43,7 @@ export default function CheckboxAnswer(props) {
   };
 
   return (
-    <div className="multiple-options-container">
+    <div className={`multiple-options-container ${props.className}`}>
       {props.question.content.options.map((option, index) =>
           <div key={option.id} className="multiple-options-line">
             <div className="multiple-options-row">
@@ -53,7 +52,6 @@ export default function CheckboxAnswer(props) {
                   className="tick-checkbox"
                   type="checkbox"
                   id={option.id}
-                  name="radio"
                   value={option.label}
                   onChange={clickChecked}
                   checked={props.answer.label.indexOf(option.label) !== -1}

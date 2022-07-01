@@ -6,7 +6,6 @@ export default function Answers(props) {
   const [title, setTitle] = useState('Untitled form');
   const [description, setDescription] = useState('Form description');
   const [questions, setQuestions] = useState([]);
-  const [formActive, setFormActive] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [answers, setAnswers] = useState([]);
 
@@ -42,13 +41,11 @@ export default function Answers(props) {
           default:
             break;
         }
-
         return {
           value,
           label
         };
       }));
-      setFormActive(data.formActive);
       setSelectedIndex(data.selectedIndex);
     }
     dataString = window.localStorage.getItem('MY_ANSWER_FORM_STATE');

@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Answers from './components/Answers';
-import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from "react-router-dom";
 
 function App() {
 
@@ -37,6 +37,7 @@ function App() {
           </ul>
         </nav>
         <Routes>
+          <Route path="/" element={<Navigate to="/create_form" />}  />
           <Route path="/create_form" element={<Form />}
           />
           <Route path="/submit_form" element={<Answers />}

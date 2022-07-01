@@ -17,7 +17,7 @@ export default function RadioAnswer(props) {
   }
 
   return (
-    <div className="multiple-options-container">
+    <div className={`multiple-options-container ${props.className}`}>
       <div className="multiple-options-container">
         {props.question.content.options.map((option, index) =>
           <div key={option.id} className="multiple-options-line">
@@ -27,7 +27,6 @@ export default function RadioAnswer(props) {
                   className="radio-selector"
                   type="radio"
                   id={option.id}
-                  name="radio"
                   value={option.label}
                   onChange={clickChecked}
                   checked={props.answer.label === option.label}

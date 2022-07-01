@@ -22,6 +22,7 @@ export default function AnswerForm(props) {
             setFieldDescription={saveText}
             placeholder="Short-answer text"
             maxLength="120"
+            className={props.question.required && props.answer.value === '' ?  "error" : ""}
           />)
       case "paragraph":
         return (
@@ -29,6 +30,7 @@ export default function AnswerForm(props) {
             fieldDescription={props.answer.value}
             setFieldDescription={saveText}
             placeholder="Long-answer text"
+            className={props.question.required && props.answer.value === '' ? "error" : ""}
           />
         )
       case "radio":
@@ -37,6 +39,7 @@ export default function AnswerForm(props) {
           question={props.question}
           updateAnswer={props.updateAnswer}
           answer={props.answer}
+          className={props.question.required && props.answer.value === '' ? "error" : ""}
         />
         )
       case "checkbox":
@@ -45,9 +48,16 @@ export default function AnswerForm(props) {
             question={props.question}
             updateAnswer={props.updateAnswer}
             answer={props.answer}
+            className={props.question.required && props.answer.value.length === 0 ? "error" : ""}
           />)
       case "number":
-        return <LinearScaleAnswer question={props.question} />
+        return (
+        <LinearScaleAnswer
+          question={props.question}
+          updateAnswer={props.updateAnswer}
+          answer={props.answer}
+          className={props.question.required && props.answer.value === -1 ? "error" : ""}
+        />)
       default:
         return null;
     }
