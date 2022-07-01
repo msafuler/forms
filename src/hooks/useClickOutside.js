@@ -6,7 +6,7 @@ export const useClickOutside = (element, initialState) => {
 
   useEffect(() => {
     const pageClickEvent = (e) => {
-      console.log('pageClickEvent', element.current.contains(e.target));
+
 
       if (element.current !== null && !element.current.contains(e.target)) {
         setOpen(!open);

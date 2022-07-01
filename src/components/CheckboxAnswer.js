@@ -1,37 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-export default function Checkbox(props) {
+export default function CheckboxAnswer(props) {
+  const other = "Other..."
 
-  const modifyQuestionContent = props.modifyQuestionContent;
+  console.log(props.answer)
+  const otherIndex = props.answer.label.findIndex(label =>
+    label === other);
 
-  const [checked, setChecked] = useState([]);
+  const isOtherSelected = props.answer.label.findIndex(label =>
+    label === other) >= 0;
 
   const clickChecked = (event) => {
-    console.log(event.target.checked)
     if (event.target.checked) {
-      addChecked(event.target.id);
+      addChecked(event.target.value);
     } else {
-      removeChecked(event.target.id);
+      removeChecked(event.target.value);
     }
   }
 
-  // useEffect(() => {
-  //   modifyQuestionContent({ options: props.options })
-  // }, [props.options]);
+  const changeOtherValue = (event) => {
+    const newlyChecked = [...props.answer.value];
+    newlyChecked[otherIndex] = event.target.value;
+    const newLabels = [...props.answer.label];
+    newLabels[otherIndex] = other;
+    props.updateAnswer({ ...props.answer, value: newlyChecked });
+  }
 
   const addChecked = (id) => {
-    setChecked(prevChecked => {
-    const newlyChecked = [...prevChecked];
-    newlyChecked.push(id);
-    return newlyChecked;
-    });
+    const newlyChecked = [...props.answer.value, id === other ? '' : id];
+    const newLabels = [...props.answer.label, id];
+    props.updateAnswer({ ...props.answer, label: newLabels, value: newlyChecked });
   }
 
   const removeChecked = (id) => {
-    setChecked(prevChecked => {
-    const newlyChecked = [...prevChecked];
-      return newlyChecked.filter(item => item !== id)
-    });
+    const newLabels = [...props.answer.label];
+    const newlyChecked = [...props.answer.value];
+
+    const index = props.answer.label.findIndex(item => item === id)
+    newLabels.splice(index, 1)
+    newlyChecked.splice(index, 1)
+
+    props.updateAnswer({ label: newLabels,  value: newlyChecked });
   };
 
   return (
@@ -45,11 +54,13 @@ export default function Checkbox(props) {
                   type="checkbox"
                   id={option.id}
                   name="radio"
-                  value={option.id}
+                  value={option.label}
                   onChange={clickChecked}
-                  checked={checked.indexOf(option.id) !== -1}
+                  checked={props.answer.label.indexOf(option.label) !== -1}
                 />
                 <span className="multiple-options-txt">{option.label}</span>
+                {isOtherSelected && option.label === other &&
+                <input className="other-txt" placeholder={other} onChange={changeOtherValue} value={props.answer.value[otherIndex]} />}
               </div>
             </div>
           </div>

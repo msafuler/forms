@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 export default function RadioAnswer(props) {
 
-  const modifyQuestionContent = props.modifyQuestionContent;
+  const other = "Other...";
 
-  const [checked, setChecked] = useState(null);
+  const isOtherSelected = props.answer.label === other;
 
   const clickChecked = (event) => {
-    setChecked(event.target.id);
+    const value = event.target.value
+    props.updateAnswer(
+      { label: value, value: value === other ? "" : value });
   }
 
-  // useEffect(() => {
-  //   modifyQuestionContent({ options: props.options })
-  // }, [props.options]);
+  const changeOtherValue = (event) => {
+    props.updateAnswer({...props.answer, value: event.target.value});
+  }
 
   return (
     <div className="multiple-options-container">
@@ -26,11 +28,19 @@ export default function RadioAnswer(props) {
                   type="radio"
                   id={option.id}
                   name="radio"
-                  value={option.id}
+                  value={option.label}
                   onChange={clickChecked}
-                  checked={checked === option.id}
+                  checked={props.answer.label === option.label}
                 />
                 <span className="multiple-options-txt">{option.label}</span>
+                {isOtherSelected && option.label === other &&
+                  <input
+                    className="other-txt"
+                    placeholder={other}
+                    onChange={changeOtherValue}
+                    value={props.answer.value}
+                    maxLength="110"
+                  />}
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import questionTypes from '../data/questionTypes'
-import QuestionsList from './QuestionsListDropdown';
+import questionTypes from '../data/questionTypes';
 import RadioAnswer from './RadioAnswer';
 import CheckboxAnswer from './CheckboxAnswer';
 import LinearScaleAnswer from './LinearScaleAnswer';
+import TextArea from './TextArea';
 
 export default function AnswerForm(props) {
 
@@ -11,16 +11,41 @@ export default function AnswerForm(props) {
 
   const [indexType, setIndexType] = useState(questionTypeIndex);
 
+  const saveText = (value) => props.updateAnswer({ value });
+
   const renderType = () => {
     switch (questionTypes[indexType].type) {
       case "short":
-        return <input type="text" className="short-answer" placeholder="Short-answer text" />
+        return (
+          <TextArea
+            fieldDescription={props.answer.value}
+            setFieldDescription={saveText}
+            placeholder="Short-answer text"
+            maxLength="120"
+          />)
       case "paragraph":
-        return <input type="text" className="short-answer" placeholder="Long-answer text" />
+        return (
+          <TextArea
+            fieldDescription={props.answer.value}
+            setFieldDescription={saveText}
+            placeholder="Long-answer text"
+          />
+        )
       case "radio":
-        return <RadioAnswer question={props.question} />
+        return (
+        <RadioAnswer
+          question={props.question}
+          updateAnswer={props.updateAnswer}
+          answer={props.answer}
+        />
+        )
       case "checkbox":
-        return <CheckboxAnswer question={props.question}  />
+        return (
+          <CheckboxAnswer
+            question={props.question}
+            updateAnswer={props.updateAnswer}
+            answer={props.answer}
+          />)
       case "number":
         return <LinearScaleAnswer question={props.question} />
       default:

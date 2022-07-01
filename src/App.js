@@ -23,7 +23,16 @@ function App() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/submit_form">Responses</NavLink>
+              <NavLink
+                to="/submit_form"
+                style={({ isActive }) => {
+                  return {
+                    borderBottom: isActive ? "4px solid rgba(15,100,79,0.7)" : "",
+                  };
+                }}
+              >
+                Responses
+              </NavLink>
             </li>
           </ul>
         </nav>

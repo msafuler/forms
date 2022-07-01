@@ -46,6 +46,7 @@ export default function Form(props) {
       selectedIndex
     };
     window.localStorage.setItem('MY_FORM_STATE', JSON.stringify(formState));
+    window.localStorage.removeItem('MY_ANSWER_FORM_STATE');
   }, [title, description, questions, formActive, selectedIndex]);
 
   const newQuestion = (event) => {
@@ -101,7 +102,11 @@ export default function Form(props) {
             onChange={newTitle}
             maxLength="32"
           />
-          <TextArea description={description} setDescription={setDescription}/>
+          <TextArea
+            fieldDescription={description}
+            setFieldDescription={setDescription}
+            placeholder="Form description"
+          />
         </div>
             <ReactSortable
               list={questions}

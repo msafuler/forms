@@ -115,7 +115,11 @@ input:focus {
   border-bottom: 1px dashed $light-grey;
   font-size: 16px;
   color: $grey;
+  resize: none;
+  font-family: Roboto;
+  font-size: 16px;
 }
+
 .paragraph {
   width: 85%;
   padding: 16px 0;
@@ -123,6 +127,9 @@ input:focus {
   border-bottom: 1px dashed $light-grey;
   font-size: 16px;
   color: $grey;
+  resize: none;
+  font-family: Roboto;
+  font-size: 16px;
 }
 
 .fa-solid.fa-braille.handle.form {

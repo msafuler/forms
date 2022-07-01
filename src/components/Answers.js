@@ -8,18 +8,53 @@ export default function Answers(props) {
   const [questions, setQuestions] = useState([]);
   const [formActive, setFormActive] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [answers, setAnswers] = useState([]);
 
   const didMountRef = useRef(false);
 
   useEffect(() => {
-    const dataString = window.localStorage.getItem('MY_FORM_STATE');
-    const data = JSON.parse(dataString)
+    let dataString = window.localStorage.getItem('MY_FORM_STATE');
+    let data = JSON.parse(dataString)
     if (data !== null) {
       setTitle(data.title);
       setDescription(data.description);
       setQuestions(data.questions);
+      setAnswers(data.questions.map(question => {
+        let value;
+        let label;
+
+        switch (question.type) {
+          case 'short':
+          case 'paragraph':
+            value = '';
+            break;
+          case 'radio':
+            value =  '';
+            label = '';
+            break;
+          case 'number':
+            value = -1
+            break;
+          case 'checkbox':
+            value = [];
+            label = [];
+            break;
+          default:
+            break;
+        }
+
+        return {
+          value,
+          label
+        };
+      }));
       setFormActive(data.formActive);
       setSelectedIndex(data.selectedIndex);
+    }
+    dataString = window.localStorage.getItem('MY_ANSWER_FORM_STATE');
+    data = JSON.parse(dataString);
+    if (data !== null) {
+      setAnswers(data.answers);
     }
     didMountRef.current = true;
   }, []);
@@ -29,14 +64,19 @@ export default function Answers(props) {
       return;
     }
 
-    const formState = {
-      title,
-      description,
-      questions,
-      formActive,
-      selectedIndex
+    const answerState = {
+      answers
     };
-  }, [title, description, questions, formActive, selectedIndex]);
+    window.localStorage.setItem('MY_ANSWER_FORM_STATE', JSON.stringify(answerState));
+  }, [answers]);
+
+  const updateAnswer = function (index, newAnswer) {
+    setAnswers(prevAnswers => {
+      const newAnswers = [...prevAnswers];
+      newAnswers[index] = newAnswer;
+      return newAnswers;
+    });
+  };
 
   return (
     <div className="form-container">
@@ -46,11 +86,12 @@ export default function Answers(props) {
             <h1>{title}</h1>
             <span>{description}</span>
         </div>
-
-          {questions.map((question, i) => (
+          {answers.map((answer, i) => (
             <AnswerForm
-              question={question}
-              key={question.title}
+              updateAnswer={(answer) => updateAnswer(i, answer)}
+              answer={answer}
+              question={questions[i]}
+              key={questions[i].title}
             />
           ))}
       </div>

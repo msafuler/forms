@@ -11,14 +11,15 @@ export default function TextArea(props) {
       textarea.style.height = "";
       textarea.style.height = Math.min(textarea.scrollHeight, heightLimit) + "px";
     }
+    resizeTextArea();
     textarea.addEventListener("input", resizeTextArea);
     return () => {
       textarea.removeEventListener("input", resizeTextArea);
     }
   }, []);
 
-  const changeDescription = (event) => {
-    props.setDescription(event.target.value);
+  const changeFieldDescription = (event) => {
+    props.setFieldDescription(event.target.value);
   };
 
 
@@ -26,11 +27,12 @@ export default function TextArea(props) {
     <textarea
       style={{resize: 'none'}}
       className="form-description"
-      placeholder="Form description"
-      value={props.description}
+      placeholder={props.placeholder}
+      value={props.fieldDescription}
       type="text"
-      onChange={changeDescription}
+      onChange={changeFieldDescription}
       ref={ref}
+      maxLength={props.maxLength}
     >
     </textarea>
   )
