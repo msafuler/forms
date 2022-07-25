@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from "uuid";
+import range from "../helpers/range";
 
 export default function LinearScale(props) {
 
@@ -11,22 +12,27 @@ export default function LinearScale(props) {
     props.updateAnswer({value: parseInt(event.target.value, 10)});
   }
 
-  for (let i = content.min; i <= content.max; i++) {
-    arrNum.push(<span className="linear-scale-preview-num" key={uuidv4()}>{i}</span>);
-  }
-  for (let i = content.min; i <= content.max; i++) {
-    arrIcons.push(
+  const numbers = range(content.min, content.max).map(number => {
+    return (
+      <span className="linear-scale-preview-num" key={uuidv4()}>
+        {number}
+      </span>
+    );
+  });
+
+  const icons = range(content.min, content.max).map(icon => {
+    return (
       <label className="linear-scale-container noshow answer" key={uuidv4()}>
         <input
           className="linear-radio-selector"
           type="radio"
-          value={i}
+          value={icon}
           onChange={chooseNumber}
-          checked={props.answer.value === i}
+          checked={props.answer.value === icon}
         />
       </label>
     );
-  };
+  });
 
   const clearNumber = () => {
     props.updateAnswer({value: -1});
@@ -38,10 +44,10 @@ export default function LinearScale(props) {
         <span>{content.minLabel}</span>
         <div className="linear-scale-main">
           <div className="linear-scale-container noshow">
-            {arrNum}
+            {numbers}
           </div>
           <div className="linear-scale-container noshow">
-            {arrIcons}
+            {icons}
           </div>
         </div>
         <span>{content.maxLabel}</span>

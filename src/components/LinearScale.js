@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from "uuid";
 import Range from './Range';
+import range from "../helpers/range";
 
 export default function LinearScale(props) {
 
@@ -11,16 +12,19 @@ export default function LinearScale(props) {
   const [maxLabel, setMaxLabel] = useState(content.maxLabel);
   const modifyQuestionContent = props.modifyQuestionContent;
 
-  const arrNum = [];
-  const arrIcons = [];
+  const rangeNumbers = range(min, max);
 
-  for (let i = min; i <= max; i++) {
-    arrNum.push(<span className="linear-scale-preview-num" key={uuidv4()}>{i}</span>)
-  }
+  const numbers = rangeNumbers.map(n => (
+    <span className="linear-scale-preview-num" key={uuidv4()}>
+      {n}
+    </span>
+  ));
 
-  for (let i = min; i <= max; i++) {
-    arrIcons.push(<i className="fa-solid fa-circle" key={uuidv4()}></i>)
-  }
+  const icons = rangeNumbers.map(i =>
+    <i className="fa-solid fa-circle" key={uuidv4()}>
+      {i}
+    </i>
+  );
 
   useEffect(() => {
     modifyQuestionContent({ min, max, minLabel, maxLabel })
@@ -30,10 +34,10 @@ export default function LinearScale(props) {
     <div>
       <div className={`linear-scale-preview-hidden ${!props.isActive ? '' : 'no-show'}`}>
         <div className="linear-scale-container noshow">
-          {arrIcons}
+          {icons}
         </div>
         <div className="linear-scale-container noshow">
-          {arrNum}
+          {numbers}
         </div>
       </div>
       <div className={`${props.isActive ? '' : 'no-show'}`}>
